@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+import numpy as np
 from scipy import sparse
 from sklearn.model_selection import train_test_split
 from sklearn.impute import SimpleImputer
@@ -12,7 +13,7 @@ def load_data():
     cur_path = os.path.abspath(os.path.dirname(__file__))
     train_file_path = os.path.join(cur_path, "train.csv")
     features = pd.read_csv(train_file_path)
-    labels = features.pop("Survived")
+    labels = np.array(features.pop("Survived"))
     x_train, x_test, y_train, y_test = train_test_split(features, labels, test_size=0.3, random_state=1)
 
     col_cat = ['Sex', 'Embarked']

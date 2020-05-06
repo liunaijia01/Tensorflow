@@ -31,6 +31,6 @@ class FM(tf.keras.models.Model):
         output = self.bias + wx_sum + cross_part
         return output
 
-def model_construct(num_feature):
+def construct_model(num_feature):
     return FM(num_feature=num_feature)
 

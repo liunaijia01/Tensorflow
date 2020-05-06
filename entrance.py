@@ -1,12 +1,14 @@
 import tensorflow as tf
 import matplotlib.pyplot as plt
 from data.Titanic_kaggle.data_process import load_data
+from sklearn.metrics import roc_auc_score
 
+tf.keras.backend.set_floatx('float64')
 
 def load_model(model_name):
     if model_name == "LR":
         from models.LR import construct_model
-    elif model_name == "LR":
+    elif model_name == "FM":
         from models.FM import construct_model
     else:
         print ("The {} is not support currently, using LR for instead".format(model_name))
@@ -27,7 +29,8 @@ def main(model_name):
     #               loss=tf.keras.losses.binary_crossentropy,
     #               metrics=[tf.keras.metrics.binary_accuracy])
 
-    history = model.fit(x_train, y_train, epochs=100, validation_split=0.2)
+    callbacks = [tf.keras.callbacks.EarlyStopping(patience=3, min_delta=1e-3)]
+    history = model.fit(x_train, y_train, epochs=100, validation_split=0.2, callbacks=callbacks)
     print (history)
 
     #learning curves in validation dataset
@@ -35,6 +38,8 @@ def main(model_name):
 
     #evaluate model on test dataset
     model.evaluate(x_test, y_test)
+    auc_test = roc_auc_score(y_test, model(x_test))
+    print ("AUC for test dataset is {}".format(auc_test))
 
     #pick up varaibles in layers
     # variables = model.layers[0].variables
@@ -43,5 +48,5 @@ def main(model_name):
 
 
 if __name__ == '__main__':
-    model_name = "FM"
+    model_name = "LR"
     main(model_name)
