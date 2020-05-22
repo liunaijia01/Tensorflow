@@ -5,6 +5,7 @@ import tensorflow as tf
 class FM(tf.keras.models.Model):
     def __init__(self, num_feature, reg_l2=0.01, k=10):
         super().__init__()
+        print ("k value is ", k)
         self.num_feature = num_feature
         self.bias = tf.Variable([0.0])
         self.linear_weight = tf.keras.layers.Embedding(num_feature, 1,
@@ -32,5 +33,5 @@ class FM(tf.keras.models.Model):
         return output
 
 def construct_model(num_feature):
-    return FM(num_feature=num_feature)
+    return FM(num_feature=num_feature, k=11)
 
