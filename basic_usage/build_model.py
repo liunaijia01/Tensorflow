@@ -27,7 +27,7 @@ model.add(tf.keras.layers.Dense(300, activation='sigmoid'))
 model.add(tf.keras.layers.Dense(100, activation='sigmoid'))
 model.add(tf.keras.layers.Dense(10, activation='softmax'))
 
-# model = tf.keras.models.Sequential([
+# model = tf.keras.algorithm.Sequential([
 #     tf.keras.layers.Dense(300, activation='sigmoid'),
 #     tf.keras.layers.Dense(100, activation='sigmoid'),
 #     tf.keras.layers.Dense(10, activation='softmax')
@@ -35,5 +35,6 @@ model.add(tf.keras.layers.Dense(10, activation='softmax'))
 #下面这种方法不需要指定输入的维度
 
 model.compile(loss='sparse_categorical_crossentropy', optimizer='sgd', metrics=['accuracy'])
-history = model.fit(x_train, y_train, epochs=10, validation_data=(x_val, y_val))
+history = model.fit(x_train, y_train, epochs=5, validation_data=(x_val, y_val))
 plot_learning_curves(history)
+

@@ -7,12 +7,12 @@ from sklearn.metrics import roc_auc_score
 
 def load_model(model_name):
     if model_name == "LR":
-        from models.LR import construct_model
+        from algorithm.LR import construct_model
     elif model_name == "FM":
-        from models.FM import construct_model
+        from algorithm.FM import construct_model
     else:
         print ("The {} is not support currently, using LR for instead".format(model_name))
-        from models.LR import construct_model
+        from algorithm.LR import construct_model
     return construct_model
 
 def main(model_name):

@@ -50,3 +50,4 @@ with strategy.scope():
 history = model.fit(train_dataset,
                     steps_per_epoch = x_train_scaled.shape[0] // batch_size,
                     epochs=10)
+
